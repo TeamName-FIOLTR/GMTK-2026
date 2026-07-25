@@ -60,7 +60,7 @@ mouse_filter = 2
 
 [node name="Button" type="Button" parent="content/VBoxContainer" unique_id=912642890]
 layout_mode = 2
-text = "bongos
+text = "Play Game
 "
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="content" unique_id=2131864228]
