@@ -12,3 +12,6 @@ hit_sound = ExtResource("2_k0juu")
 [node name="Player" parent="." unique_id=249687543 instance=ExtResource("2_4wyf3")]
 
 [node name="rocs" type="Node2D" parent="." unique_id=1462123642]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=463864313]
+anchor_mode = 0
