@@ -11,23 +11,23 @@
 resource_local_to_scene = true
 font = ExtResource("6_i7141")
 font_size = 54
-font_color = Color(0.5, 1, 1, 1)
+font_color = Color(1, 0.5392157, 0.7882353, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 2
 stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0, 0.5, 0.5, 1)
+stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7141"]
 resource_local_to_scene = true
 font = ExtResource("6_i7141")
 font_size = 54
-font_color = Color(0.5, 1, 1, 1)
+font_color = Color(1, 0.5392157, 0.7882353, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 2
 stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0, 0.5, 0.5, 1)
+stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
 
 [node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player")]
 script = ExtResource("1_rwgxs")
