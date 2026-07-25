@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bi7lod1gjag3a"]
+
+[ext_resource type="Script" uid="uid://bp1xrcw415b7k" path="res://scenes/roc.gd" id="1_3s6n6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bw8s4"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqfh4"]
+radius = 81.78
+
+[node name="Roc" type="Node2D" unique_id=260991363]
+script = ExtResource("1_3s6n6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=837699497]
+modulate = Color(0, 0.833179, 0.83531207, 1)
+texture = SubResource("CompressedTexture2D_bw8s4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=243854444]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1900752554]
+shape = SubResource("CircleShape2D_rqfh4")
