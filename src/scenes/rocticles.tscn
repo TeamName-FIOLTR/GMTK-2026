@@ -1,8 +1,55 @@
 [gd_scene format=3 uid="uid://c8w67jb8njjj1"]
 
+[ext_resource type="Texture2D" uid="uid://3catpvycjua1" path="res://assets/particles/rocicle_00.png" id="1_75y2s"]
+[ext_resource type="Script" uid="uid://baquhlnu5jvh7" path="res://scenes/rocticles.gd" id="2_fyv6v"]
+[ext_resource type="Texture2D" uid="uid://h40s4qdc8t08" path="res://assets/particles/rocicle_01.png" id="3_2rv28"]
+[ext_resource type="Texture2D" uid="uid://cw5kbnvnccgr6" path="res://assets/particles/rocicle_02.png" id="4_yct44"]
+[ext_resource type="Texture2D" uid="uid://cfkj0qwenw5dy" path="res://assets/particles/rocicle_03.png" id="5_pw6m3"]
+[ext_resource type="Texture2D" uid="uid://cfx04ihsfljno" path="res://assets/particles/rocicle_04.png" id="6_tbs04"]
+[ext_resource type="Texture2D" uid="uid://bryhpppv3nutg" path="res://assets/particles/rocicle_05.png" id="7_koftu"]
+[ext_resource type="Texture2D" uid="uid://76o2ysfax0jy" path="res://assets/particles/rocicle_06.png" id="8_1irig"]
+[ext_resource type="Texture2D" uid="uid://buu0hkxc7ag7v" path="res://assets/particles/rocicle_07.png" id="9_ydgyk"]
+[ext_resource type="Texture2D" uid="uid://dkwlr58w8t0qr" path="res://assets/particles/rocicle_08.png" id="10_yponn"]
+[ext_resource type="Texture2D" uid="uid://bipsf2cp02rs1" path="res://assets/particles/rocicle_09.png" id="11_r8rnq"]
+[ext_resource type="Texture2D" uid="uid://ck6o0opvoof5u" path="res://assets/particles/rocicle_10.png" id="12_c0tcn"]
+[ext_resource type="Texture2D" uid="uid://cud6ihu7f5wk0" path="res://assets/particles/rocicle_11.png" id="13_gu08e"]
+[ext_resource type="Texture2D" uid="uid://cirj5fv7d6w45" path="res://assets/particles/rocicle_12.png" id="14_4umxa"]
+[ext_resource type="Texture2D" uid="uid://mm87ea087t5c" path="res://assets/particles/rocicle_13.png" id="15_4q741"]
+[ext_resource type="Texture2D" uid="uid://cahkehesf2qif" path="res://assets/particles/rocicle_14.png" id="16_8ssmw"]
+[ext_resource type="Texture2D" uid="uid://cwash8nl8niye" path="res://assets/particles/rocicle_15.png" id="17_j7o6o"]
+[ext_resource type="Texture2D" uid="uid://vkugtsq5k61v" path="res://assets/particles/rocicle_16.png" id="18_nhako"]
+
+[sub_resource type="Curve" id="Curve_2rv28"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2rv28"]
+curve = SubResource("Curve_2rv28")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rqfh4"]
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 92.57
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 261.1
 gravity = Vector3(0, 98, 0)
+scale_min = 0.25
+scale_curve = SubResource("CurveTexture_2rv28")
 
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1892427251]
+[node name="rocticles" type="GPUParticles2D" unique_id=1892427251]
+modulate = Color(0.3372549, 0.77254903, 1, 1)
+emitting = false
+amount = 70
+texture = ExtResource("1_75y2s")
+lifetime = 3.0
+one_shot = true
+speed_scale = 5.0
+explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_rqfh4")
+script = ExtResource("2_fyv6v")
+particle_textures = Array[Texture]([ExtResource("1_75y2s"), ExtResource("3_2rv28"), ExtResource("4_yct44"), ExtResource("5_pw6m3"), ExtResource("6_tbs04"), ExtResource("7_koftu"), ExtResource("8_1irig"), ExtResource("9_ydgyk"), ExtResource("10_yponn"), ExtResource("11_r8rnq"), ExtResource("12_c0tcn"), ExtResource("13_gu08e"), ExtResource("14_4umxa"), ExtResource("15_4q741"), ExtResource("16_8ssmw"), ExtResource("17_j7o6o"), ExtResource("18_nhako")])
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -13,6 +13,12 @@ var depth_speed : float = 1000
 
 var roc_count : int = 0
 
+var rocticles_scene = preload("res://scenes/rocticles.tscn")
+
+var shake_freq : float = 15
+var shake_amp : float = 0.0
+var shake_t : float = 0.0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	rng = RandomNumberGenerator.new()
@@ -54,9 +60,15 @@ func test_click() -> bool:
 	var sfx = SoundEffecticle.get_sound_effect_node(hit_sound)
 	add_child(sfx)
 	sfx.global_position = roc.global_position
+	sfx.pitch_scale = pow(2.0,randf_range(-0.05,0.05)-1)
 	sfx.play()
 	roc.queue_free()
+	var rocticles : Rocticles = rocticles_scene.instantiate()
+	add_child(rocticles)
+	rocticles.emitting = true
+	rocticles.global_position = roc.global_position
 	roc_count = $rocs.get_child_count()
+	shake_amp = 10
 	$CanvasLayer/Control/Label.text = "%s rocs left" % roc_count
 	#$CanvasLayer/Control/Label/Label.text = $CanvasLayer/Control/Label.text
 	return true
@@ -74,11 +86,13 @@ func test_click() -> bool:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_x += event.relative.x
+		mouse_x = clamp(mouse_x,0,get_viewport_rect().size.x)
 	if event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT) and event.is_pressed():
 			print(test_click())
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
+	
 
 var next_t : float = 0
 var t = 999990.0
@@ -95,6 +109,9 @@ func _physics_process(delta: float) -> void:
 	t += delta
 	var camera_pos = $Camera2D.position.y
 	$Camera2D.position.y = lerp(camera_pos,player_y,10*delta)
+	$Camera2D.offset.x = shake_amp*cos(2*PI*shake_freq*shake_t)
+	shake_t += delta
+	shake_amp = lerp(shake_amp,0.0,10.0*delta)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()

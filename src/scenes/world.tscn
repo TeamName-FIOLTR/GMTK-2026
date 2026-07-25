@@ -5,6 +5,29 @@
 [ext_resource type="AudioStream" uid="uid://8xk5acyjskto" path="res://assets/sfx/qubodupIceDamage03b_cut.wav" id="2_k0juu"]
 [ext_resource type="Texture2D" uid="uid://xqvc64wt5vms" path="res://assets/backgrounds/plaingreyrocs.png" id="3_k0juu"]
 [ext_resource type="PackedScene" uid="uid://by58wnj67ra8x" path="res://scenes/roc_label.tscn" id="5_71j4m"]
+[ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="6_i7141"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qfnet"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 1, 1, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0, 0.5, 0.5, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7141"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 1, 1, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0, 0.5, 0.5, 1)
 
 [node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player")]
 script = ExtResource("1_rwgxs")
@@ -38,7 +61,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" parent="CanvasLayer/Control" unique_id=1264966551 instance=ExtResource("5_71j4m")]
+[node name="Label2" parent="CanvasLayer/Control" unique_id=1264966551 instance=ExtResource("5_71j4m")]
+layout_mode = 0
+anchors_preset = 0
+label_settings = SubResource("LabelSettings_qfnet")
+
+[node name="Label" parent="CanvasLayer/Control" unique_id=1729876361 instance=ExtResource("5_71j4m")]
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0
@@ -47,5 +75,5 @@ offset_left = 0.0
 offset_top = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+label_settings = SubResource("LabelSettings_i7141")
 horizontal_alignment = 2
-vertical_alignment = 2
