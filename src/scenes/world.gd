@@ -11,6 +11,16 @@ var gravity : float = 4500
 var jump_v : float = 700
 var depth_speed : float = 1000
 
+var roc_count : int = 0
+
+var rocticles_scene = preload("res://scenes/rocticles.tscn")
+
+var shake_freq : float = 15
+var shake_amp : float = 0.0
+var shake_t : float = 0.0
+
+var level_limits : float = -1
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	rng = RandomNumberGenerator.new()
@@ -28,19 +38,23 @@ func spawn_roc():
 	pass
 
 func spawn_all_thi_hits():
+	var end_y = 0
 	for h in hit_things_test:
 		var roc : Roc = preload("res://scenes/roc.tscn").instantiate()
 		$rocs.add_child(roc)
 		roc.position.x = rng.randf_range(0.1,0.9)*get_viewport_rect().size.x
 		roc.position.y = -$rocs.position.y+h*60/323*get_viewport_rect().size.y
+		end_y = max(roc.position.y,end_y)
 		pass
 	pass
+	roc_count = len(hit_things_test)
+	level_limits = end_y+4*get_viewport_rect().size.y
 
 @export var hit_sound : AudioStream
 
 func test_click() -> bool:
 	# me when raycaset node
-	if not player.is_colliding(): return false
+	if not is_instance_valid(player.get_collider()): return false
 	var roc : Roc = player.get_collider().get_parent()
 	var hit : Vector2 = player.get_collision_point()
 	if hit.y - player_y > 300: return false
@@ -51,9 +65,18 @@ func test_click() -> bool:
 	var sfx = SoundEffecticle.get_sound_effect_node(hit_sound)
 	add_child(sfx)
 	sfx.global_position = roc.global_position
+	sfx.pitch_scale = pow(2.0,randf_range(-0.05,0.05)-1)
 	sfx.play()
 	roc.queue_free()
+	var rocticles : Rocticles = rocticles_scene.instantiate()
+	add_child(rocticles)
+	rocticles.emitting = true
+	rocticles.global_position = roc.global_position
+	roc_count = $rocs.get_child_count()
+	shake_amp = 10
+	$CanvasLayer/Control/Label.text = "%s rocs left" % roc_count
 	
+	#$CanvasLayer/Control/Label/Label.text = $CanvasLayer/Control/Label.text
 	return true
 	#var global_pos = player.global_position
 	#var tolarence : float = 50
@@ -69,11 +92,13 @@ func test_click() -> bool:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_x += event.relative.x
+		mouse_x = clamp(mouse_x,0,get_viewport_rect().size.x)
 	if event is InputEventMouseButton:
 		if (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT) and event.is_pressed():
 			print(test_click())
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
+	
 
 var next_t : float = 0
 var t = 999990.0
@@ -89,13 +114,18 @@ func _physics_process(delta: float) -> void:
 	v += gravity*delta
 	t += delta
 	var camera_pos = $Camera2D.position.y
-	$Camera2D.position.y = lerp(camera_pos,player_y,0.1*delta)
+	$Camera2D.position.y = lerp(camera_pos,player_y,10*delta)
+	$Camera2D.offset.x = shake_amp*cos(2*PI*shake_freq*shake_t)
+	shake_t += delta
+	shake_amp = lerp(shake_amp,0.0,10.0*delta)
+	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(-player_y/100.0)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()
 		t = 0
 		next_t = rng.randf_range(0,1.0)
 	pass
+	
 
 
 
