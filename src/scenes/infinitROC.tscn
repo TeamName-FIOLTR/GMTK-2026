@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d14mfnnt0msuu"]
+
+[ext_resource type="Texture2D" uid="uid://xqvc64wt5vms" path="res://assets/backgrounds/plaingreyrocs.png" id="1_ht4yy"]
+
+[node name="Parallax2D" type="Parallax2D" unique_id=621703735]
+modulate = Color(0.55935377, 0.55935377, 0.5593537, 1)
+repeat_size = Vector2(2048, 2048)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=960645228]
+texture = ExtResource("1_ht4yy")
