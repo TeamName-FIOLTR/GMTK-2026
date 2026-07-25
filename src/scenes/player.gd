@@ -38,8 +38,11 @@ func get_collision_point() -> Vector2:
 func is_colliding() -> bool:
 	return $RayCast2D.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D3.is_colliding()
 
+func display_hit():
+	$AudioStreamPlayer2D.play()
+	$AnimatedSprite2D.play("hit")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-			$AudioStreamPlayer2D.play()
+			display_hit()
