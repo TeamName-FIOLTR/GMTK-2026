@@ -84,10 +84,13 @@ func _physics_process(delta: float) -> void:
 	
 	player.position.x = mouse_x
 	player_y += v*delta
+	#print(player_y)
 	player.position.y = player_y
 	v += gravity*delta
 	t += delta
-	$rocs.position.y += -delta*depth_speed
+	var camera_pos = $Camera2D.position.y
+	$Camera2D.position.y = lerp(camera_pos,player_y,0.1*delta)
+	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()
 		t = 0
