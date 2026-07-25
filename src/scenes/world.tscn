@@ -3,11 +3,21 @@
 [ext_resource type="Script" uid="uid://yh5je4k1u21o" path="res://scenes/world.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://bvcxbjdtutv87" path="res://scenes/player.tscn" id="2_4wyf3"]
 [ext_resource type="AudioStream" uid="uid://8xk5acyjskto" path="res://assets/sfx/qubodupIceDamage03b_cut.wav" id="2_k0juu"]
+[ext_resource type="Texture2D" uid="uid://xqvc64wt5vms" path="res://assets/backgrounds/plaingreyrocs.png" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://by58wnj67ra8x" path="res://scenes/roc_label.tscn" id="5_71j4m"]
 
 [node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player")]
 script = ExtResource("1_rwgxs")
 player = NodePath("Player")
 hit_sound = ExtResource("2_k0juu")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1138985664]
+modulate = Color(0.55935377, 0.55935377, 0.5593537, 1)
+repeat_size = Vector2(2048, 2048)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=237053192]
+texture = ExtResource("3_k0juu")
 
 [node name="Player" parent="." unique_id=249687543 instance=ExtResource("2_4wyf3")]
 
@@ -15,3 +25,27 @@ hit_sound = ExtResource("2_k0juu")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=463864313]
 anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1022909119]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=2034216696]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" parent="CanvasLayer/Control" unique_id=1264966551 instance=ExtResource("5_71j4m")]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+offset_left = 0.0
+offset_top = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 2
+vertical_alignment = 2

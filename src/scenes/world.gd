@@ -11,6 +11,8 @@ var gravity : float = 4500
 var jump_v : float = 700
 var depth_speed : float = 1000
 
+var roc_count : int = 0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	rng = RandomNumberGenerator.new()
@@ -35,12 +37,13 @@ func spawn_all_thi_hits():
 		roc.position.y = -$rocs.position.y+h*60/323*get_viewport_rect().size.y
 		pass
 	pass
+	roc_count = len(hit_things_test)
 
 @export var hit_sound : AudioStream
 
 func test_click() -> bool:
 	# me when raycaset node
-	if not player.is_colliding(): return false
+	if not is_instance_valid(player.get_collider()): return false
 	var roc : Roc = player.get_collider().get_parent()
 	var hit : Vector2 = player.get_collision_point()
 	if hit.y - player_y > 300: return false
@@ -53,7 +56,9 @@ func test_click() -> bool:
 	sfx.global_position = roc.global_position
 	sfx.play()
 	roc.queue_free()
-	
+	roc_count = $rocs.get_child_count()
+	$CanvasLayer/Control/Label.text = "%s rocs left" % roc_count
+	#$CanvasLayer/Control/Label/Label.text = $CanvasLayer/Control/Label.text
 	return true
 	#var global_pos = player.global_position
 	#var tolarence : float = 50
@@ -89,13 +94,14 @@ func _physics_process(delta: float) -> void:
 	v += gravity*delta
 	t += delta
 	var camera_pos = $Camera2D.position.y
-	$Camera2D.position.y = lerp(camera_pos,player_y,0.1*delta)
+	$Camera2D.position.y = lerp(camera_pos,player_y,10*delta)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()
 		t = 0
 		next_t = rng.randf_range(0,1.0)
 	pass
+	
 
 
 
