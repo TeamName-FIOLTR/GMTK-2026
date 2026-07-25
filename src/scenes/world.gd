@@ -19,6 +19,8 @@ var shake_freq : float = 15
 var shake_amp : float = 0.0
 var shake_t : float = 0.0
 
+var level_limits : float = -1
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	rng = RandomNumberGenerator.new()
@@ -36,14 +38,17 @@ func spawn_roc():
 	pass
 
 func spawn_all_thi_hits():
+	var end_y = 0
 	for h in hit_things_test:
 		var roc : Roc = preload("res://scenes/roc.tscn").instantiate()
 		$rocs.add_child(roc)
 		roc.position.x = rng.randf_range(0.1,0.9)*get_viewport_rect().size.x
 		roc.position.y = -$rocs.position.y+h*60/323*get_viewport_rect().size.y
+		end_y = max(roc.position.y,end_y)
 		pass
 	pass
 	roc_count = len(hit_things_test)
+	level_limits = end_y+4*get_viewport_rect().size.y
 
 @export var hit_sound : AudioStream
 
@@ -70,6 +75,7 @@ func test_click() -> bool:
 	roc_count = $rocs.get_child_count()
 	shake_amp = 10
 	$CanvasLayer/Control/Label.text = "%s rocs left" % roc_count
+	
 	#$CanvasLayer/Control/Label/Label.text = $CanvasLayer/Control/Label.text
 	return true
 	#var global_pos = player.global_position
@@ -112,6 +118,7 @@ func _physics_process(delta: float) -> void:
 	$Camera2D.offset.x = shake_amp*cos(2*PI*shake_freq*shake_t)
 	shake_t += delta
 	shake_amp = lerp(shake_amp,0.0,10.0*delta)
+	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(-player_y/100.0)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()
