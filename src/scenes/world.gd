@@ -7,6 +7,9 @@ var mouse_x : float = 0
 var player_y : float = 0
 
 var rng : RandomNumberGenerator
+var gravity : float = 4500
+var jump_v : float = 700
+var depth_speed : float = 1000
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -14,6 +17,8 @@ func _ready() -> void:
 	rng.seed = 3
 	
 	mouse_x = get_viewport_rect().size.x/2.0
+	spawn_all_thi_hits()
+	Engine.physics_ticks_per_second = 120
 
 func spawn_roc():
 	var roc : Roc = preload("res://scenes/roc.tscn").instantiate()
@@ -22,13 +27,31 @@ func spawn_roc():
 	roc.position.y = -$rocs.position.y+rng.randf_range(1.00,2.0)*get_viewport_rect().size.y
 	pass
 
+func spawn_all_thi_hits():
+	for h in hit_things_test:
+		var roc : Roc = preload("res://scenes/roc.tscn").instantiate()
+		$rocs.add_child(roc)
+		roc.position.x = rng.randf_range(0.1,0.9)*get_viewport_rect().size.x
+		roc.position.y = -$rocs.position.y+h*60/323*get_viewport_rect().size.y
+		pass
+	pass
+
+@export var hit_sound : AudioStream
+
 func test_click() -> bool:
 	# me when raycaset node
-	if not $Player/RayCast2D.is_colliding(): return false
-	var roc : Roc = $Player/RayCast2D.get_collider().get_parent()
-	var hit : Vector2 = $Player/RayCast2D.get_collision_point()
+	if not player.is_colliding(): return false
+	var roc : Roc = player.get_collider().get_parent()
+	var hit : Vector2 = player.get_collision_point()
+	if hit.y - player_y > 300: return false
 	player_y = hit.y
-	v = -300
+	var proportion : float = pow(player_y/get_viewport_rect().size.y,1/3.0)
+	
+	v = -jump_v #*proportion
+	var sfx = SoundEffecticle.get_sound_effect_node(hit_sound)
+	add_child(sfx)
+	sfx.global_position = roc.global_position
+	sfx.play()
 	roc.queue_free()
 	
 	return true
@@ -47,25 +70,30 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_x += event.relative.x
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		if (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT) and event.is_pressed():
 			print(test_click())
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().reload_current_scene()
 
 var next_t : float = 0
-var t = 0.0
+var t = 999990.0
 
 var v = 0
 
 func _physics_process(delta: float) -> void:
 	
 	player.position.x = mouse_x
-	player.position.y += v*delta
-	v += 1000.0*delta
+	player_y += v*delta
+	player.position.y = player_y
+	v += gravity*delta
 	t += delta
-	$rocs.position.y += -delta*1000.0
+	$rocs.position.y += -delta*depth_speed
 	if t > next_t:
-		spawn_roc()
+		#spawn_roc()
 		t = 0
-		next_t = rng.randf_range(0,1)
+		next_t = rng.randf_range(0,1.0)
 	pass
+
+
+
+var hit_things_test : PackedFloat64Array = [0.0, 4.0, 8.0, 12.0, 14.0, 16.0, 20.0, 21.0, 22.0, 22.5, 23.0, 24.0, 28.000001907348633, 29.000001907348633, 30.000001907348633, 30.500001907348633, 32.0, 34.0, 36.0, 36.5, 38.0, 40.0, 41.0, 42.0, 43.0, 44.0, 44.5, 45.0, 45.5, 46.0, 47.0, 48.0, 48.5, 49.0, 50.0, 50.5, 51.0, 52.0, 52.5, 53.0, 53.5, 54.0, 54.5, 55.0, 55.5, 56.0, 57.0, 57.5, 58.0, 60.0, 60.5, 61.0, 62.0]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://e0g8ti4nb6wt"]
+
+[ext_resource type="Script" uid="uid://bueybxt3cj2an" path="res://scenes/sound_effecticle.gd" id="1_2x6t2"]
+
+[node name="SoundEffecticle" type="AudioStreamPlayer2D" unique_id=91423018]
+autoplay = true
+script = ExtResource("1_2x6t2")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
