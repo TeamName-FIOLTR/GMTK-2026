@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dnc2qnyan0o4j" path="res://assets/sfx/swishes/swish-4.wav" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://c25gmjc10664g" path="res://assets/player/hit/ninjaDwarfHit.png0001.png" id="7_3v2ag"]
 [ext_resource type="AudioStream" uid="uid://b5vep5gelqfwu" path="res://assets/sfx/swishes/swish-5.wav" id="7_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://bien7xotjy6hk" path="res://assets/player/fall/ninjaDwarfFall.png0002.png" id="7_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://bsrrxfwqimqlb" path="res://assets/player/hit/ninjaDwarfHit.png0002.png" id="8_jej6c"]
 [ext_resource type="Texture2D" uid="uid://b7amosbkrgodp" path="res://assets/player/hit/ninjaDwarfHit.png0003.png" id="9_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://c1hhwtuhx0gyx" path="res://assets/player/hit/ninjaDwarfHit.png0004.png" id="10_oprun"]
@@ -31,11 +32,14 @@ stream_4/stream = ExtResource("7_d2wvv")
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_f1ej7")
+}, {
+"duration": 1.0,
 "texture": ExtResource("7_3v2ag")
 }],
 "loop": 1,
 "name": &"fall",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -53,9 +57,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_qfm1y")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"hit",
-"speed": 9.0
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=249687543]
@@ -84,5 +88,5 @@ stream = SubResource("AudioStreamRandomizer_3v2ag")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=830171524]
 sprite_frames = SubResource("SpriteFrames_c6okd")
-animation = &"fall"
+animation = &"hit"
 script = ExtResource("13_jej6c")
