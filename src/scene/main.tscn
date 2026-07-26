@@ -120,7 +120,7 @@ horizontal_alignment = 2
 
 [node name="Label2" parent="content/VBoxContainer2" unique_id=1910517972 instance=ExtResource("2_brvut")]
 layout_mode = 2
-text = "Dwaf Ninja"
+text = "Dwarf Ninja"
 label_settings = SubResource("LabelSettings_4j5ol")
 horizontal_alignment = 2
 
