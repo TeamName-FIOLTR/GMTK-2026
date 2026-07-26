@@ -24,7 +24,7 @@ var level_limits : float = -1
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	rng = RandomNumberGenerator.new()
-	rng.seed = 3
+	rng.seed = Glboals.level_seed
 	
 	mouse_x = get_viewport_rect().size.x/2.0
 	spawn_all_thi_hits()
@@ -39,15 +39,15 @@ func spawn_roc():
 
 func spawn_all_thi_hits():
 	var end_y = 0
-	for h in hit_things_test:
+	for h in Glboals.hit_positions:
 		var roc : Roc = preload("res://scenes/roc.tscn").instantiate()
 		$rocs.add_child(roc)
 		roc.position.x = rng.randf_range(0.1,0.9)*get_viewport_rect().size.x
-		roc.position.y = -$rocs.position.y+h*60/323*get_viewport_rect().size.y
+		roc.position.y = -$rocs.position.y+get_viewport_rect().size.y#*h*60/323
 		end_y = max(roc.position.y,end_y)
 		pass
 	pass
-	roc_count = len(hit_things_test)
+	roc_count = len(Glboals.hit_positions)
 	level_limits = end_y+4*get_viewport_rect().size.y
 
 @export var hit_sound : AudioStream
@@ -105,6 +105,15 @@ var t = 999990.0
 
 var v = 0
 
+var judged : bool = false
+
+func judge_my_vow_shynx_of_black_quartz():
+	if $rocs.get_child_count() > 0:
+		$CanvasLayer.add_child(Glboals.LEVEL_FAILED_SCREEN.instantiate())
+	else:
+		$CanvasLayer.add_child(Glboals.LEVEL_PASSED_SCREEN.instantiate())
+	judged = true
+
 func _physics_process(delta: float) -> void:
 	
 	player.position.x = mouse_x
@@ -114,19 +123,20 @@ func _physics_process(delta: float) -> void:
 	v += gravity*delta
 	t += delta
 	var camera_pos = $Camera2D.position.y
-	$Camera2D.position.y = lerp(camera_pos,player_y,10*delta)
+	$Camera2D.position.y = clamp(lerp(camera_pos,player_y,10*delta),-1000,level_limits)
 	$Camera2D.offset.x = shake_amp*cos(2*PI*shake_freq*shake_t)
 	shake_t += delta
 	shake_amp = lerp(shake_amp,0.0,10.0*delta)
-	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(-player_y/100.0)
+	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(-$Camera2D.position.y/100.0)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()
 		t = 0
 		next_t = rng.randf_range(0,1.0)
 	pass
-	
+	if $Camera2D.position.y == level_limits and not judged:
+		judge_my_vow_shynx_of_black_quartz()
 
 
 
-var hit_things_test : PackedFloat64Array = [0.0, 4.0, 8.0, 12.0, 14.0, 16.0, 20.0, 21.0, 22.0, 22.5, 23.0, 24.0, 28.000001907348633, 29.000001907348633, 30.000001907348633, 30.500001907348633, 32.0, 34.0, 36.0, 36.5, 38.0, 40.0, 41.0, 42.0, 43.0, 44.0, 44.5, 45.0, 45.5, 46.0, 47.0, 48.0, 48.5, 49.0, 50.0, 50.5, 51.0, 52.0, 52.5, 53.0, 53.5, 54.0, 54.5, 55.0, 55.5, 56.0, 57.0, 57.5, 58.0, 60.0, 60.5, 61.0, 62.0]
+#var hit_things_test : PackedFloat64Array = [0.0, 4.0, 8.0, 12.0, 14.0, 16.0, 20.0, 21.0, 22.0, 22.5, 23.0, 24.0, 28.000001907348633, 29.000001907348633, 30.000001907348633, 30.500001907348633, 32.0, 34.0, 36.0, 36.5, 38.0, 40.0, 41.0, 42.0, 43.0, 44.0, 44.5, 45.0, 45.5, 46.0, 47.0, 48.0, 48.5, 49.0, 50.0, 50.5, 51.0, 52.0, 52.5, 53.0, 53.5, 54.0, 54.5, 55.0, 55.5, 56.0, 57.0, 57.5, 58.0, 60.0, 60.5, 61.0, 62.0]

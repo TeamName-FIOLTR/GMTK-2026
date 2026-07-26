@@ -3,38 +3,44 @@
 [ext_resource type="Script" uid="uid://yh5je4k1u21o" path="res://scenes/world.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://bvcxbjdtutv87" path="res://scenes/player.tscn" id="2_4wyf3"]
 [ext_resource type="AudioStream" uid="uid://8xk5acyjskto" path="res://assets/sfx/qubodupIceDamage03b_cut.wav" id="2_k0juu"]
-[ext_resource type="PackedScene" uid="uid://d14mfnnt0msuu" path="res://scenes/infinitROC.tscn" id="3_qfnet"]
+[ext_resource type="Texture2D" uid="uid://xqvc64wt5vms" path="res://assets/backgrounds/plaingreyrocs.png" id="3_k0juu"]
 [ext_resource type="PackedScene" uid="uid://by58wnj67ra8x" path="res://scenes/roc_label.tscn" id="5_71j4m"]
 [ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="6_i7141"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qfnet"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 0.5, 0.5, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7141"]
 resource_local_to_scene = true
 font = ExtResource("6_i7141")
 font_size = 54
-font_color = Color(1, 0.5392157, 0.7882353, 1)
+font_color = Color(0.5, 0.5, 0.5, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 2
 stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
-resource_local_to_scene = true
-font = ExtResource("6_i7141")
-font_size = 54
-font_color = Color(1, 0.5392157, 0.7882353, 1)
-stacked_outline_count = 2
-stacked_outline_0/size = 2
-stacked_outline_0/color = Color(1, 1, 1, 1)
-stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
 [node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player")]
 script = ExtResource("1_rwgxs")
 player = NodePath("Player")
 hit_sound = ExtResource("2_k0juu")
 
-[node name="Parallax2D" parent="." unique_id=621703735 instance=ExtResource("3_qfnet")]
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1138985664]
+modulate = Color(0.55935377, 0.55935377, 0.5593537, 1)
+repeat_size = Vector2(2048, 2048)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=237053192]
+texture = ExtResource("3_k0juu")
 
 [node name="Player" parent="." unique_id=249687543 instance=ExtResource("2_4wyf3")]
 
@@ -68,7 +74,7 @@ offset_right = 77.0
 offset_bottom = 23.0
 grow_horizontal = 1
 grow_vertical = 1
-label_settings = SubResource("LabelSettings_i7141")
+label_settings = SubResource("LabelSettings_qfnet")
 
 [node name="Label" parent="CanvasLayer/Control" unique_id=1729876361 instance=ExtResource("5_71j4m")]
 layout_mode = 1
@@ -79,6 +85,6 @@ offset_left = 0.0
 offset_top = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_4mrxx")
+label_settings = SubResource("LabelSettings_i7141")
 horizontal_alignment = 2
 vertical_alignment = 2
