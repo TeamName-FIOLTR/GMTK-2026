@@ -6,27 +6,27 @@
 [ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="3_0ha60"]
 [ext_resource type="PackedScene" uid="uid://d14mfnnt0msuu" path="res://scenes/infinitROC.tscn" id="6_4j5ol"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_brvut"]
-resource_local_to_scene = true
-font = ExtResource("3_0ha60")
-font_size = 54
-font_color = Color(1, 0.5392157, 0.7882353, 1)
-stacked_outline_count = 2
-stacked_outline_0/size = 2
-stacked_outline_0/color = Color(1, 1, 1, 1)
-stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_0ha60"]
 resource_local_to_scene = true
 font = ExtResource("3_0ha60")
 font_size = 54
-font_color = Color(1, 0.5392157, 0.7882353, 1)
+font_color = Color(0.5, 0.5, 0.5, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 2
 stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4j5ol"]
+resource_local_to_scene = true
+font = ExtResource("3_0ha60")
+font_size = 54
+font_color = Color(0.5, 0.5, 0.5, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
 [node name="Main" type="Control" unique_id=104248689]
 layout_mode = 3
@@ -75,13 +75,13 @@ mouse_filter = 2
 [node name="Label" parent="content/VBoxContainer2" unique_id=1264966551 instance=ExtResource("2_brvut")]
 layout_mode = 2
 text = "Ninja Dwarf"
-label_settings = SubResource("LabelSettings_brvut")
+label_settings = SubResource("LabelSettings_0ha60")
 horizontal_alignment = 2
 
 [node name="Label2" parent="content/VBoxContainer2" unique_id=1910517972 instance=ExtResource("2_brvut")]
 layout_mode = 2
 text = "Dwaf Ninja"
-label_settings = SubResource("LabelSettings_0ha60")
+label_settings = SubResource("LabelSettings_4j5ol")
 horizontal_alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=842306120]
