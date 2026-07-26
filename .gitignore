@@ -18,3 +18,5 @@ mono_crash.*.json
 
 *.blend1
 *.import
+
+export/
