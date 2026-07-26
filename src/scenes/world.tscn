@@ -8,17 +8,6 @@
 [ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="6_i7141"]
 [ext_resource type="Script" uid="uid://dq8wj681k5x0m" path="res://scenes/pauseMenu.gd" id="7_i7141"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_qfnet"]
-resource_local_to_scene = true
-font = ExtResource("6_i7141")
-font_size = 54
-font_color = Color(0.5, 0.5, 0.5, 1)
-stacked_outline_count = 2
-stacked_outline_0/size = 2
-stacked_outline_0/color = Color(1, 1, 1, 1)
-stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_i7141"]
 resource_local_to_scene = true
 font = ExtResource("6_i7141")
@@ -41,11 +30,34 @@ stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
 stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
-[node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player", "pause_menu")]
+[sub_resource type="LabelSettings" id="LabelSettings_7r4gi"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 0.5, 0.5, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7kh3"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 0.5, 0.5, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player", "pause_menu", "timeLabel")]
 script = ExtResource("1_rwgxs")
 player = NodePath("Player")
 pause_menu = NodePath("CanvasLayerPause/Control")
 hit_sound = ExtResource("2_k0juu")
+timeLabel = NodePath("CanvasLayer/Control/timerLabel")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1138985664]
 modulate = Color(0.55935377, 0.55935377, 0.5593537, 1)
@@ -87,7 +99,7 @@ offset_right = 77.0
 offset_bottom = 23.0
 grow_horizontal = 1
 grow_vertical = 1
-label_settings = SubResource("LabelSettings_qfnet")
+label_settings = SubResource("LabelSettings_i7141")
 
 [node name="Label" parent="CanvasLayer/Control" unique_id=1729876361 instance=ExtResource("5_71j4m")]
 layout_mode = 1
@@ -98,9 +110,21 @@ offset_left = 0.0
 offset_top = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_i7141")
+label_settings = SubResource("LabelSettings_4mrxx")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="timerLabel" parent="CanvasLayer/Control" unique_id=1282968684 instance=ExtResource("5_71j4m")]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+offset_left = 0.0
+offset_top = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_7r4gi")
+horizontal_alignment = 2
 
 [node name="CanvasLayerPause" type="CanvasLayer" parent="." unique_id=124186089]
 
@@ -151,7 +175,7 @@ offset_top = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Paused"
-label_settings = SubResource("LabelSettings_4mrxx")
+label_settings = SubResource("LabelSettings_w7kh3")
 horizontal_alignment = 1
 vertical_alignment = 2
 

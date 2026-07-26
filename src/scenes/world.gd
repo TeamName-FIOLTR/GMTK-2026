@@ -132,6 +132,14 @@ func judge_my_vow_shynx_of_black_quartz():
 		passed = true
 	judged = true
 
+var integrated_time : float = 0
+@export var timeLabel : Label
+func _process(delta: float) -> void:
+	if !judged:
+		integrated_time += delta
+		timeLabel.text = "Time -%.2fs" % (integrated_time)
+
+
 func _physics_process(delta: float) -> void:
 	
 	player.position.x = mouse_x
@@ -156,6 +164,3 @@ func _physics_process(delta: float) -> void:
 	#error term for aproximations resulting from lerping
 	if $Camera2D.position.y >= level_limits - 0.01 and not judged:
 		judge_my_vow_shynx_of_black_quartz()
-
-
-#var hit_things_test : PackedFloat64Array = [0.0, 4.0, 8.0, 12.0, 14.0, 16.0, 20.0, 21.0, 22.0, 22.5, 23.0, 24.0, 28.000001907348633, 29.000001907348633, 30.000001907348633, 30.500001907348633, 32.0, 34.0, 36.0, 36.5, 38.0, 40.0, 41.0, 42.0, 43.0, 44.0, 44.5, 45.0, 45.5, 46.0, 47.0, 48.0, 48.5, 49.0, 50.0, 50.5, 51.0, 52.0, 52.5, 53.0, 53.5, 54.0, 54.5, 55.0, 55.5, 56.0, 57.0, 57.5, 58.0, 60.0, 60.5, 61.0, 62.0]
