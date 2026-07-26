@@ -130,6 +130,7 @@ func judge_my_vow_shynx_of_black_quartz():
 	else:
 		$CanvasLayer.add_child(Glboals.LEVEL_PASSED_SCREEN.instantiate())
 		passed = true
+		Glboals.total_altitude += -$Camera2D.position.y/100.0
 	judged = true
 
 var integrated_time : float = 0
@@ -153,7 +154,7 @@ func _physics_process(delta: float) -> void:
 	$Camera2D.offset.x = shake_amp*cos(2*PI*shake_freq*shake_t)
 	shake_t += delta
 	shake_amp = lerp(shake_amp,0.0,10.0*delta)
-	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(-$Camera2D.position.y/100.0)
+	$CanvasLayer/Control/Label2.text = "Altitude: %s" % int(Glboals.total_altitude-$Camera2D.position.y/100.0)
 	#$rocs.position.y += -delta*depth_speed
 	if t > next_t:
 		#spawn_roc()

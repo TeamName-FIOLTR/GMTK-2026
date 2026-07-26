@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://cvjykv11mxud1"]
 
 [ext_resource type="Script" uid="uid://cqqirgpyrf6e2" path="res://scene/level_passed_screen.gd" id="1_84pkd"]
-[ext_resource type="Texture2D" uid="uid://0df44jrlcurr" path="res://icon.svg" id="2_8pmr0"]
+[ext_resource type="Texture2D" uid="uid://bkl3y453cf57f" path="res://assets/player/passed.png" id="2_8pmr0"]
 [ext_resource type="PackedScene" uid="uid://by58wnj67ra8x" path="res://scenes/roc_label.tscn" id="3_ql2gu"]
 [ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="4_83oy8"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_b0six"]
+[sub_resource type="LabelSettings" id="LabelSettings_8pmr0"]
 resource_local_to_scene = true
 font = ExtResource("4_83oy8")
 font_size = 54
-font_color = Color(1, 0.5392157, 0.7882353, 1)
+font_color = Color(0.5, 0.5, 0.5, 1)
 stacked_outline_count = 2
 stacked_outline_0/size = 2
 stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
-stacked_outline_1/color = Color(0.5, 0.039215688, 0.2882353, 1)
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
 [node name="LEVEL PASSED SCREEN" type="Control" unique_id=1515616696]
 layout_mode = 3
@@ -42,14 +42,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=843899939]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_8pmr0")
+expand_mode = 1
 
 [node name="Label" parent="VBoxContainer" unique_id=1264966551 instance=ExtResource("3_ql2gu")]
 layout_mode = 2
 text = "LEVEL PASSED!!!
-PRESS \"ENTER\" TO CONTINUE!!!"
-label_settings = SubResource("LabelSettings_b0six")
+PRESS \"C\" TO CONTINUE!!!"
+label_settings = SubResource("LabelSettings_8pmr0")
 horizontal_alignment = 1

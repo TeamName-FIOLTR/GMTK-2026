@@ -9,6 +9,8 @@ extends Node
 @export var LEVEL_FAILED_SCREEN : PackedScene = preload("res://scene/level_failed_screen.tscn")
 @export var LEVEL_PASSED_SCREEN : PackedScene = preload("res://scene/level_passed_screen.tscn")
 
+@export var total_altitude : float = 0
+
 func _ready() -> void:
 	var file = FileAccess.open('user://save.txt',FileAccess.READ)
 	if file:
