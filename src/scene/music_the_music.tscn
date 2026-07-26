@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ccbw876b6reh3"]
+
+[ext_resource type="AudioStream" uid="uid://c4cxj8eamic2g" path="res://assets/mucis/maybething/bass_kicks.wav" id="1_qx722"]
+[ext_resource type="AudioStream" uid="uid://bk48l5s5obtne" path="res://assets/mucis/maybething/maybeviolin.wav" id="2_m8qxo"]
+[ext_resource type="AudioStream" uid="uid://0k507t21bwom" path="res://assets/mucis/maybething/mayhbething_bass.wav" id="3_dsy4h"]
+[ext_resource type="AudioStream" uid="uid://wndl4n006hkv" path="res://assets/mucis/maybething/the_koto.wav" id="4_d8axh"]
+[ext_resource type="Script" uid="uid://cmhaoj8p5aanu" path="res://scene/music_the_music.gd" id="5_7jn6h"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_rqfh4"]
+stream_count = 4
+stream_0/stream = ExtResource("1_qx722")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_m8qxo")
+stream_1/volume = -9.4
+stream_2/stream = ExtResource("3_dsy4h")
+stream_2/volume = -2.8
+stream_3/stream = ExtResource("4_d8axh")
+stream_3/volume = -2.15
+
+[node name="MusicTheMusic" type="AudioStreamPlayer" unique_id=91486435]
+stream = SubResource("AudioStreamSynchronized_rqfh4")
+volume_db = -80.0
+autoplay = true
+script = ExtResource("5_7jn6h")

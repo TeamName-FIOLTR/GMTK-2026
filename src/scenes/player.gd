@@ -40,6 +40,7 @@ func is_colliding() -> bool:
 
 func display_hit():
 	$AudioStreamPlayer2D.play()
+	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.play("hit")
 
 func _input(event: InputEvent) -> void:
