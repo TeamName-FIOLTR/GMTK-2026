@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var player: CharacterBody2D
+@export var pause_menu : Control
 
 var mouse_x : float = 0
 var player_y : float = 0
@@ -106,6 +107,12 @@ func _input(event: InputEvent) -> void:
 	if passed and event.is_action_pressed("continue"):
 		Glboals.generate_new_level()
 		get_tree().reload_current_scene()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		pause_menu.visible = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = true
 	
 
 var next_t : float = 0

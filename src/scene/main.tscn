@@ -28,7 +28,7 @@ stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
 stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
-[node name="Main" type="Control" unique_id=104248689]
+[node name="Main" type="Control" unique_id=104248689 node_paths=PackedStringArray("level_selector")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,6 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_itxqv")
+level_selector = NodePath("content/Control/VBoxContainer/LoadLevelUI/SpinBox")
 
 [node name="Parallax2D" parent="." unique_id=621703735 instance=ExtResource("6_4j5ol")]
 
@@ -48,26 +49,65 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="content" unique_id=938011332]
+[node name="Control" type="Control" parent="content" unique_id=1895042800]
 layout_mode = 1
-anchors_preset = -1
 anchor_top = 0.287
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="content/Control" unique_id=938011332]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="content/VBoxContainer" unique_id=912642890]
+[node name="Button" type="Button" parent="content/Control/VBoxContainer" unique_id=912642890]
 layout_mode = 2
 text = "Play Game
 "
+
+[node name="LoadLevelUI" type="Control" parent="content/Control/VBoxContainer" unique_id=1669581493]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="content/Control/VBoxContainer/LoadLevelUI" unique_id=303910276]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load Level"
+
+[node name="SpinBox" type="SpinBox" parent="content/Control/VBoxContainer/LoadLevelUI" unique_id=1311796178]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.757
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0517578e-05
+offset_top = -0.5
+offset_right = -3.0517578e-05
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+min_value = 1.0
+value = 1.0
+
+[node name="btnQuit" type="Button" parent="content/Control/VBoxContainer" unique_id=247695691]
+layout_mode = 2
+text = "Quit"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="content" unique_id=2131864228]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.497
+anchor_bottom = 0.287
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -95,4 +135,6 @@ mouse_filter = 2
 texture = ExtResource("2_v0l8b")
 expand_mode = 2
 
-[connection signal="pressed" from="content/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="content/Control/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="content/Control/VBoxContainer/LoadLevelUI/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="button_up" from="content/Control/VBoxContainer/btnQuit" to="." method="_on_btn_quit_button_up"]

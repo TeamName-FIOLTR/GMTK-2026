@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://xqvc64wt5vms" path="res://assets/backgrounds/plaingreyrocs.png" id="3_k0juu"]
 [ext_resource type="PackedScene" uid="uid://by58wnj67ra8x" path="res://scenes/roc_label.tscn" id="5_71j4m"]
 [ext_resource type="FontFile" uid="uid://eldiynjsj48l" path="res://assets/fonts/ADLaMDisplay_Regular.ttf" id="6_i7141"]
+[ext_resource type="Script" uid="uid://dq8wj681k5x0m" path="res://scenes/pauseMenu.gd" id="7_i7141"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qfnet"]
 resource_local_to_scene = true
@@ -29,9 +30,21 @@ stacked_outline_0/color = Color(1, 1, 1, 1)
 stacked_outline_1/size = 13
 stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
 
-[node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player")]
+[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
+resource_local_to_scene = true
+font = ExtResource("6_i7141")
+font_size = 54
+font_color = Color(0.5, 0.5, 0.5, 1)
+stacked_outline_count = 2
+stacked_outline_0/size = 2
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_outline_1/size = 13
+stacked_outline_1/color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="world" type="Node2D" unique_id=1472554076 node_paths=PackedStringArray("player", "pause_menu")]
 script = ExtResource("1_rwgxs")
 player = NodePath("Player")
+pause_menu = NodePath("CanvasLayerPause/Control")
 hit_sound = ExtResource("2_k0juu")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1138985664]
@@ -88,3 +101,60 @@ grow_vertical = 2
 label_settings = SubResource("LabelSettings_i7141")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="CanvasLayerPause" type="CanvasLayer" parent="." unique_id=124186089]
+
+[node name="Control" type="Control" parent="CanvasLayerPause" unique_id=811988612]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_i7141")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayerPause/Control" unique_id=601998491]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="CanvasLayerPause/Control/VBoxContainer" unique_id=1902837420]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Resume" type="Button" parent="CanvasLayerPause/Control/VBoxContainer" unique_id=1403189734]
+layout_mode = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="CanvasLayerPause/Control/VBoxContainer" unique_id=476514950]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" parent="CanvasLayerPause/Control" unique_id=1303492462 instance=ExtResource("5_71j4m")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.0
+anchor_right = 0.8
+anchor_bottom = 0.2
+offset_left = 0.0
+offset_top = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_4mrxx")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[connection signal="button_up" from="CanvasLayerPause/Control/VBoxContainer/MainMenu" to="CanvasLayerPause/Control" method="_on_main_menu_button_up"]
+[connection signal="button_up" from="CanvasLayerPause/Control/VBoxContainer/Resume" to="CanvasLayerPause/Control" method="_on_resume_button_up"]
+[connection signal="button_up" from="CanvasLayerPause/Control/VBoxContainer/Quit" to="CanvasLayerPause/Control" method="_on_quit_button_up"]
